@@ -6,3 +6,14 @@ class Job:
         self.hours_at_standard_rate = 0
         self.hours_at_overtime_rate = 0
         self.hours_at_alternate_rate = 0
+
+    def is_valid_job(self, babysitter):
+        if self.__is_valid_start_time(babysitter) and self.__is_valid_end_time(babysitter):
+            return True
+        return False
+
+    def __is_valid_start_time(self, babysitter):
+        return True if self.start_time >= babysitter.start_time else False
+
+    def __is_valid_end_time(self, babysitter):
+        return True if self.end_time <= babysitter.end_time else False
