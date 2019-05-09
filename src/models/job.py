@@ -13,7 +13,11 @@ class Job:
         return False
 
     def __is_valid_start_time(self, babysitter):
-        return True if self.start_time >= babysitter.start_time else False
+        if 1200 <= self.start_time <= 2400 and self.start_time >= babysitter.start_time:
+            return True
+        return False
 
     def __is_valid_end_time(self, babysitter):
-        return True if self.end_time <= babysitter.end_time else False
+        if 0 < self.end_time < 1200 and self.end_time <= babysitter.end_time:
+            return True
+        return False
