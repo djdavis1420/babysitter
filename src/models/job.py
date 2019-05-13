@@ -37,6 +37,7 @@ class Job:
         try:
             standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
             overtime_rate_limit = family.hour_schedule.get('overtime_rate_limit')
+            overtime_rate_limit = 2400 if overtime_rate_limit == 0 else overtime_rate_limit
             hours = (overtime_rate_limit - standard_rate_limit) / 100
             return int(hours)
         except TypeError:
