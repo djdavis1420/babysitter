@@ -24,7 +24,8 @@ class Job:
     def calculate_total_pay(self, family):
         standard_pay = (self.hours_at_standard_rate * family.standard_rate) if self.hours_at_standard_rate > 0 else 0
         overtime_pay = (self.hours_at_overtime_rate * family.overtime_rate) if self.hours_at_overtime_rate > 0 else 0
-        self.total_pay = round(standard_pay + overtime_pay, 2)
+        alternate_pay = (self.hours_at_alternate_rate * family.alternate_rate) if self.hours_at_alternate_rate > 0 else 0
+        self.total_pay = round(standard_pay + overtime_pay + alternate_pay, 2)
 
     def __is_valid_start_time(self, babysitter):
         if 1200 <= self.start_time <= 2400 and self.start_time >= babysitter.start_time:

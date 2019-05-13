@@ -141,3 +141,11 @@ class TestJob:
         self.job.calculate_total_pay(self.family)
 
         assert self.job.total_pay == 60.00
+
+    def test_calculate_pay__should_update_total_pay_on_job_to_forty_dollars(self):
+        self.job.hours_at_alternate_rate = 2
+        self.family.alternate_rate = 20.00
+
+        self.job.calculate_total_pay(self.family)
+
+        assert self.job.total_pay == 40.00
