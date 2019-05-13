@@ -23,3 +23,11 @@ class TestJob:
         actual = self.job.is_valid_job(babysitter)
 
         assert actual is True
+
+    def test_parse_hours__should_update_standard_hours_on_job_to_four(self):
+        family = Mock()
+        family.hour_schedule = {'standard_rate_limit': 2200, 'overtime_rate_limit': 0}
+
+        self.job.parse_hours(family)
+
+        assert self.job.hours_at_standard_rate == 4
