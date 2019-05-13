@@ -34,7 +34,13 @@ class Job:
         return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
     def __calculate_hours_at_overtime_rate(self, family):
-        pass
+        try:
+            standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
+            overtime_rate_limit = family.hour_schedule.get('overtime_rate_limit')
+            hours = (overtime_rate_limit - standard_rate_limit) / 100
+            return int(hours)
+        except TypeError:
+            self.hours_at_overtime_rate = 0
 
     def __calculate_hours_at_alternate_rate(self, family):
         pass
