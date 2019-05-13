@@ -31,3 +31,11 @@ class TestJob:
         self.job.parse_hours(family)
 
         assert self.job.hours_at_standard_rate == 4
+
+    def test_parse_hours__should_update_standard_hours_on_job_to_six(self):
+        family = Mock()
+        family.hour_schedule = {'standard_rate_limit': 0, 'overtime_rate_limit': 1}
+
+        self.job.parse_hours(family)
+
+        assert self.job.hours_at_standard_rate == 6
