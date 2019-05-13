@@ -98,3 +98,30 @@ class TestJob:
         self.job.parse_hours(self.babysitter, self.family)
 
         assert self.job.hours_at_alternate_rate == 3
+
+    def test_parse_hours__should_update_standard_hours_to_five_and_overtime_hours_to_three(self):
+        self.family.hour_schedule = {'standard_rate_limit': 2300}
+
+        self.job.parse_hours(self.babysitter, self.family)
+
+        assert self.job.hours_at_standard_rate == 5
+        assert self.job.hours_at_overtime_rate == 3
+        assert self.job.hours_at_alternate_rate == 0
+
+    def test_parse_hours__should_update_standard_hours_to_four_and_overtime_hours_to_two_and_alternate_hours_to_two(self):
+        self.family.hour_schedule = {'standard_rate_limit': 2200, 'overtime_rate_limit': 0}
+
+        self.job.parse_hours(self.babysitter, self.family)
+
+        assert self.job.hours_at_standard_rate == 4
+        assert self.job.hours_at_overtime_rate == 2
+        assert self.job.hours_at_alternate_rate == 2
+
+    def test_parse_hours__should_update_standard_hours_to_three_and_overtime_hours_to_five(self):
+        self.family.hour_schedule = {'standard_rate_limit': 2100}
+
+        self.job.parse_hours(self.babysitter, self.family)
+
+        assert self.job.hours_at_standard_rate == 3
+        assert self.job.hours_at_overtime_rate == 5
+        assert self.job.hours_at_alternate_rate == 0

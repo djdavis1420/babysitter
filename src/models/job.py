@@ -37,19 +37,19 @@ class Job:
         return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
     def __calculate_hours_at_overtime_rate(self, family):
-        try:
-            standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
+        standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
+        if family.hour_schedule.get('overtime_rate_limit') is None:
+            hours = (self.end_time - standard_rate_limit) / 100
+        else:
             overtime_rate_limit = family.hour_schedule.get('overtime_rate_limit')
             overtime_rate_limit = 2400 if overtime_rate_limit == 0 else overtime_rate_limit
             hours = (overtime_rate_limit - standard_rate_limit) / 100
-            return int(hours) if hours > 0 else (24 - abs(int(hours)))
-        except TypeError:
-            self.hours_at_overtime_rate = 0
+        return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
     def __calculate_hours_at_alternate_rate(self, family):
-        try:
+        if family.hour_schedule.get('overtime_rate_limit') is None:
+            return 0
+        else:
             overtime_rate_limit = family.hour_schedule.get('overtime_rate_limit')
             hours = (self.end_time - overtime_rate_limit) / 100
             return int(hours) if hours > 0 else (24 - abs(int(hours)))
-        except TypeError:
-            self.hours_at_alternate_rate = 0
