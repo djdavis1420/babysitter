@@ -149,3 +149,27 @@ class TestJob:
         self.job.calculate_total_pay(self.family)
 
         assert self.job.total_pay == 40.00
+
+    def test_calculate_pay__should_update_total_pay_on_job_to_one_hundreddollars(self):
+        self.job.hours_at_standard_rate = 5
+        self.job.hours_at_overtime_rate = 4
+        self.job.hours_at_alternate_rate = 0
+        self.family.standard_rate = 10.00
+        self.family.overtime_rate = 12.50
+        self.family.alternate_rate = 20.00
+
+        self.job.calculate_total_pay(self.family)
+
+        assert self.job.total_pay == 100.00
+
+    def test_calculate_pay__should_update_total_pay_on_job_to_one_hundred_and_fifty_dollars(self):
+        self.job.hours_at_standard_rate = 5
+        self.job.hours_at_overtime_rate = 4
+        self.job.hours_at_alternate_rate = 2
+        self.family.standard_rate = 10.00
+        self.family.overtime_rate = 15.00
+        self.family.alternate_rate = 20.00
+
+        self.job.calculate_total_pay(self.family)
+
+        assert self.job.total_pay == 150.00
