@@ -24,6 +24,18 @@ class TestJob:
 
         assert actual is True
 
+    def test_is_valid_job__should_return_false_for_job_with_invalid_start_time(self):
+        self.babysitter.start_time = 2000
+        actual = self.job.is_valid_job(self.babysitter)
+
+        assert actual is False
+
+    def test_is_valid_job__should_return_false_for_job_with_invalid_end_time(self):
+        self.babysitter.end_time = 0
+        actual = self.job.is_valid_job(self.babysitter)
+
+        assert actual is False
+
     def test_parse_hours__should_update_standard_hours_on_job_to_four(self):
         self.family.hour_schedule = {'standard_rate_limit': 2200}
 
