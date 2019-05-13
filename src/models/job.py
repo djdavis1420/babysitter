@@ -31,7 +31,7 @@ class Job:
         standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
         standard_rate_limit = 2400 if standard_rate_limit == 0 else standard_rate_limit
         hours = (standard_rate_limit - self.start_time) / 100
-        return int(hours)
+        return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
     def __calculate_hours_at_overtime_rate(self, family):
         pass

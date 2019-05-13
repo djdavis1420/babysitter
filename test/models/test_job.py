@@ -26,7 +26,7 @@ class TestJob:
 
     def test_parse_hours__should_update_standard_hours_on_job_to_four(self):
         family = Mock()
-        family.hour_schedule = {'standard_rate_limit': 2200, 'overtime_rate_limit': 0}
+        family.hour_schedule = {'standard_rate_limit': 2200}
 
         self.job.parse_hours(family)
 
@@ -34,8 +34,16 @@ class TestJob:
 
     def test_parse_hours__should_update_standard_hours_on_job_to_six(self):
         family = Mock()
-        family.hour_schedule = {'standard_rate_limit': 0, 'overtime_rate_limit': 1}
+        family.hour_schedule = {'standard_rate_limit': 0}
 
         self.job.parse_hours(family)
 
         assert self.job.hours_at_standard_rate == 6
+
+    def test_parse_hours__should_update_standard_hours_on_job_to_eight(self):
+        family = Mock()
+        family.hour_schedule = {'standard_rate_limit': 200}
+
+        self.job.parse_hours(family)
+
+        assert self.job.hours_at_standard_rate == 8
