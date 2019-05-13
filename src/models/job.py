@@ -39,7 +39,6 @@ class Job:
 
     def __calculate_hours_at_standard_rate(self, family):
         standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
-        standard_rate_limit = 2400 if standard_rate_limit == 0 else standard_rate_limit
         hours = (standard_rate_limit - self.start_time) / 100
         return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
@@ -49,7 +48,6 @@ class Job:
             hours = (self.end_time - standard_rate_limit) / 100
         else:
             overtime_rate_limit = family.hour_schedule.get('overtime_rate_limit')
-            overtime_rate_limit = 2400 if overtime_rate_limit == 0 else overtime_rate_limit
             hours = (overtime_rate_limit - standard_rate_limit) / 100
         return int(hours) if hours > 0 else (24 - abs(int(hours)))
 
