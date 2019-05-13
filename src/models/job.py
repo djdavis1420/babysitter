@@ -12,6 +12,14 @@ class Job:
             return True
         return False
 
+    def parse_hours(self, babysitter, family):
+        if self.is_valid_job(babysitter):
+            self.hours_at_standard_rate = self.__calculate_hours_at_standard_rate(family)
+            self.hours_at_overtime_rate = self.__calculate_hours_at_overtime_rate(family)
+            self.hours_at_alternate_rate = self.__calculate_hours_at_alternate_rate(family)
+        else:
+            raise ValueError
+
     def __is_valid_start_time(self, babysitter):
         if 1200 <= self.start_time <= 2400 and self.start_time >= babysitter.start_time:
             return True
@@ -21,11 +29,6 @@ class Job:
         if 0 < self.end_time < 1200 and self.end_time <= babysitter.end_time:
             return True
         return False
-
-    def parse_hours(self, family):
-        self.hours_at_standard_rate = self.__calculate_hours_at_standard_rate(family)
-        self.hours_at_overtime_rate = self.__calculate_hours_at_overtime_rate(family)
-        self.hours_at_alternate_rate = self.__calculate_hours_at_alternate_rate(family)
 
     def __calculate_hours_at_standard_rate(self, family):
         standard_rate_limit = family.hour_schedule.get('standard_rate_limit')
