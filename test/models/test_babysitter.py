@@ -4,7 +4,7 @@ from src.models.babysitter import Babysitter
 class TestBabysitter:
 
     def setup_method(self):
-        self.babysitter = Babysitter()
+        self.babysitter = Babysitter('Dylan', 1700, 400)
 
     def test__should_create_new_instance_of_babysitter(self):
         assert self.babysitter.name == 'Dylan'
