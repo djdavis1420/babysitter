@@ -23,10 +23,7 @@ def validate_input(expected_type, prompt):
 
 print('-' * 100)
 print('Babysitter Payment Calculator')
-print('-' * 100)
-print('Assuming: Names will always be strings.')
-print('Assuming: Rates of Pay will always be integers.')
-print('Assuming: Times will always be in 24-hour format on the hour.')
+print('Please see the README for basic assumptions.')
 print('-' * 100)
 
 babysitter_name = validate_input(str, 'What is your name? ')
