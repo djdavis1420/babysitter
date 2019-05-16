@@ -8,7 +8,7 @@ def validate_input(expected_type, prompt):
     while type(response) is not expected_type:
         response = input(prompt)
         try:
-            if expected_type == int and int(response) > 0:
+            if expected_type == int and int(response) >= 0:
                 response = int(response)
             elif expected_type == float and float(response) > 0:
                 response = float(response)
@@ -27,8 +27,8 @@ print('Please see the README for basic assumptions.')
 print('-' * 100)
 
 babysitter_name = validate_input(str, 'What is your name? ')
-babysitter_start_time = validate_input(int, 'What is your start time? ')
-babysitter_end_time = validate_input(int, 'What is your end time? ')
+babysitter_start_time = validate_input(int, 'At what time do you start babysitting? ')
+babysitter_end_time = validate_input(int, 'At what time do you stop babysitting? ')
 babysitter = Babysitter(babysitter_name, babysitter_start_time, babysitter_end_time)
 
 family_name = validate_input(str, 'What is the client\'s family name? ')
